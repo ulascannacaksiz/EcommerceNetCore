@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\molla-eCommerce-html-template\popup\assets\images\demos\demo-6\products\" />
+    <Folder Include="wwwroot\molla-eCommerce-html-template\popup\assets\images\popup\quickView\" />
+    <Folder Include="wwwroot\molla-eCommerce-html-template\popup\popup\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>
