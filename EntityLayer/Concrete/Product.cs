@@ -12,7 +12,8 @@ namespace EntityLayer.Concrete
         [Key]
         public int Id { get; set; }
         public int CategoryId { get; set; }
-        public int SizeID { get; set; }
+        public Category Category { get; set; }
+        public int SizeId { get; set; }
         public string Color { get; set; }
         public string Brand { get; set; }
         public int Price { get; set; }

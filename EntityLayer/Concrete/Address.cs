@@ -12,9 +12,12 @@ namespace EntityLayer.Concrete
         [Key]
         public int Id { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
         public string Name { get; set; }
         public int CityId { get; set; }
+        public City City { get; set; }
         public int ProvinceId{ get; set; }
+        public Province Province { get; set; }
         public string AddressDescription { get; set; }
         public int Phone { get; set; }
         public string PersonName { get; set; }
