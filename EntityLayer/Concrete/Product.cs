@@ -23,5 +23,6 @@ namespace EntityLayer.Concrete
         public string Information { get; set; }
         public DateTime Date { get; set; }
         public bool Status { get; set; }
+        public virtual Image Image { get; set; }
     }
 }

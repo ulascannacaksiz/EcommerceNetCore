@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Image>
+@{
+    ViewData["Title"] = "Default";
+    Layout = null;
+}
+
+
+<div class="col-md-6">
+    <div class="product-gallery product-gallery-vertical">
+        <div class="row">
+            <figure class="product-main-image">
+                <img id="product-zoom" src="@ViewBag.cover" data-zoom-image="@ViewBag.Cover" alt="product image">
+
+                <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                    <i class="icon-arrows"></i>
+                </a>
+            </figure><!-- End .product-main-image -->
+
+            <div id="product-zoom-gallery" class="product-image-gallery">
+                @foreach (var item in Model)
+               {
+                <a class="product-gallery-item active" href="#" data-image="@item.ImageUrl" data-zoom-image="@item.ImageUrl">
+                    <img src="@item.ImageUrl" alt="product side">
+                </a>
+               }
+
+            </div><!-- End .product-image-gallery -->
+        </div><!-- End .row -->
+    </div><!-- End .product-gallery -->
+</div><!-- End .col-md-6 -->
