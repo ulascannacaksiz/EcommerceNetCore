@@ -34,16 +34,17 @@
                         </div><!-- End .product-content -->
 
                         <div class="details-filter-row details-row-size">
-                            <label>Color:</label>
-
+                            <label>Renk:</label>
+                                @{
+                                    string[] colors = item.Color.Split(",");
+                                }
+                                @foreach (var color in colors){
                             <div class="product-nav product-nav-thumbs">
                                 <a href="#" class="active">
-                                    <img src="assets/images/products/single/1-thumb.jpg" alt="product desc">
-                                </a>
-                                <a href="#">
-                                    <img src="assets/images/products/single/2-thumb.jpg" alt="product desc">
+                                     @color
                                 </a>
                             </div><!-- End .product-nav -->
+                                }
                         </div><!-- End .details-filter-row -->
 
                             @if (item.Id == 0)
@@ -82,7 +83,7 @@
 
                         <div class="product-details-footer">
                             <div class="product-cat">
-                                <span>Category:</span>
+                                <span>Kategori:</span>
                                 <a href="#">@item.Category.CategoryName</a>,
                             </div><!-- End .product-cat -->
 
@@ -106,7 +107,7 @@
                     <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Açıklama</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+                    <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Bilgiler</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Kargo ve İade</a>
@@ -269,7 +270,7 @@
                         <div class="ratings">
                             <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
                         </div><!-- End .ratings -->
-                        <span class="ratings-text">( 2 Reviews )</span>
+                        <span class="ratings-text">( 2 Değerlendirme )</span>
                     </div><!-- End .rating-container -->
 
                     <div class="product-nav product-nav-thumbs">
@@ -433,7 +434,7 @@
                         <div class="ratings">
                             <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
                         </div><!-- End .ratings -->
-                        <span class="ratings-text">( 2 Reviews )</span>
+                        <span class="ratings-text">( 2 Değerlendirme )</span>
                     </div><!-- End .rating-container -->
                 </div><!-- End .product-body -->
             </div><!-- End .product -->
