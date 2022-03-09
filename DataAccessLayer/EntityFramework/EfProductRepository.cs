@@ -13,6 +13,17 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfProductRepository:GenericRepository<Product>,IProductDal
     {
+        public List<Product> GetProductAllWithImage()
+        {
+            using (var c= new Context())
+            {
+                return c.Products.Include(p => p.Image).Where(c=>c.Image.CoverStatus==true).Include(y=>y.Category).ToList();
+
+                //var pro = c.Products.FromSqlRaw("Select Products.Id,Products.Brand,Products.CategoryId,Products.Title,Products.Price,Images.ImageUrl,Images.CoverStatus,Products.Color,Products.Date,Products.Description,Products.Information,Products.SizeId,Products.Status,Products.Stock From Products inner join Images on Products.Id = Images.ProductId").ToList();
+                //return pro;
+
+            }
+        }
 
         public List<Product> GetProductDetailWithCategory(int id)
         {

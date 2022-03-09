@@ -156,3 +156,4 @@ C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\Busin
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\DataAccessLayer.pdb
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\EntityLayer.pdb
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\ImageList\Default.cshtml.g.cs
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Category\Index.cshtml.g.cs

@@ -10,6 +10,5 @@ namespace BusinessLayer.Abstract
     public interface IImageService:IGenericService<Image>
     {
         List<Image> GetListByProductId(int id);
-        List<Image> GetCoverByProductId(int id);
     }
 }

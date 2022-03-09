@@ -18,12 +18,6 @@ namespace BusinessLayer.Concrete
             _ımageDal = ımageDal;
         }
 
-        public List<Image> GetCoverByProductId(int id)
-        {
-            throw new NotImplementedException();
-            //return _ımageDal.GetListAll(x => x.CoverStatus==true).Where(x => x.Id==id).ToList();
-        }
-
         public List<Image> GetList()
         {
             throw new NotImplementedException();
