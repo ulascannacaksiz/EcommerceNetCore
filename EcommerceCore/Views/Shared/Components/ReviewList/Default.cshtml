@@ -1,0 +1,25 @@
+﻿@model List<EntityLayer.Concrete.Rating>
+@foreach (var item in Model)
+{
+
+    <div class="review">
+        <div class="row no-gutters">
+        <div class="col-auto">
+            <h4><a href="#">@item.UserId</a></h4>
+            <div class="ratings-container">
+                <div class="ratings">
+                    <div class="ratings-val" style="width: @(item.Vote*20)%; "></div><!-- End .ratings-val -->
+                </div><!-- End .ratings -->
+            </div><!-- End .rating-container -->
+            <span class="review-date">6 days ago</span>
+        </div><!-- End .col -->
+        <div class="col">
+
+            <div class="review-content">
+                <p>@item.Description</p>
+            </div><!-- End .review-content -->
+        </div><!-- End .col-auto -->
+    </div><!-- End .row -->
+</div>
+    
+}
