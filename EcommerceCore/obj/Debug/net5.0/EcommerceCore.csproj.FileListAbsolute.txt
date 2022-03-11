@@ -158,3 +158,4 @@ C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\Entit
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\ImageList\Default.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Category\Index.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\ReviewList\Default.cshtml.g.cs
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Contact\Index.cshtml.g.cs

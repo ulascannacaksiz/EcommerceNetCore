@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<System.Linq.IGrouping<object, EcommerceCore.Controllers.CategoryController>>*@
+﻿
 @model IEnumerable<EntityLayer.Concrete.Product>
 @{
     ViewData["Title"] = "Index";
@@ -8,6 +8,7 @@
     var category = 0;
     var categoryId = 0;
 }
+
 <div class="page-content">
     <div class="container">
         <div class="row">
@@ -83,14 +84,6 @@
 
                             <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                         }
-
-
-
-
-
-
-
-
                     </div><!-- End .row -->
                 </div><!-- End .products -->
 
@@ -176,7 +169,7 @@
                                 </div><!-- End .filter-items -->
                             </div><!-- End .widget-body -->
                         </div><!-- End .collapse -->
-                    </div>
+                        </div>
 
                         <!-- End .widget -->
                     }
