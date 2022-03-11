@@ -6,6 +6,7 @@
 }
 @{
     var category = 0;
+    var categoryId = 0;
 }
 <div class="page-content">
     <div class="container">
@@ -36,10 +37,11 @@
                 </div><!-- End .toolbox -->
 
                 <div class="products mb-3">
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" id="productalani">
 
                         @foreach (var item in Model)
                         {
+                            categoryId = item.CategoryId;
                             category = item.Category.ParentId;
                             <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                                 <div class="product product-7 text-center">
@@ -253,21 +255,64 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-   /* var data = [];
-           if(e.target.checked == true){
-            data.push(e.target.value);
-       }*/
-   $('.custom-control-input').click((e)=>{
-        console.log(data);
-        var data = { id:7 , brands:"Samsung" };
-       $.ajax({
-           url:"/Category/Index/",
-           method:"Post",
-           data:data,
-           success:((da)=>{
-               $("body").html(da);
-               console.log(da);
-           })
-       });
-   })
+     var selectedbrands = [];
+           
+    $('.custom-control-input').click((e)=>{
+         if(e.target.checked == true){
+             selectedbrands.push(e.target.value);
+        }
+        
+         var data = { id:@categoryId , brands:selectedbrands };
+        $.ajax({
+            url:"/Category/Index/",
+            method:"post",
+            data:data,
+            success:((returneddata)=>{
+               
+                 let convertdata = JSON.parse(returneddata);
+                 let deger="";
+                  $.each(convertdata,(index,value)=>{
+
+                         deger+=   `<div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                                 <div class="product product-7 text-center">
+                                     <figure class="product-media">
+                                         <span class="product-label label-new">New</span>
+                                         <a href="${value.Id}">
+                                             <img src="${value.Image.ImageUrl}" alt="Product image" class="product-image">
+                                         </a>
+
+                                         <div class="product-action-vertical">
+                                             <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                             <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                             <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                         </div>
+
+                                     <div class="product-action">
+                                             <a href="#" class="btn-product btn-cart"><span>Sepete Ekle</span></a>
+                                         </div>
+                                 </figure>
+
+                                 <div class="product-body">
+                                         <div class="product-cat">
+                                             <a href="#"> ${value.Category.CategoryName}</a>
+                                         </div>
+                                     <h3 class="product-title"><a href="product.html">${value.Title}</a></h3>>
+                                     <div class="product-price">
+                                             ${value.Price} TL
+                                         </div>
+                                     <div class="ratings-container">
+                                             <div class="ratings">
+                                                 <div class="ratings-val" style="width: 50%;"></div>
+                                         </div>
+                                         <span class="ratings-text">(2)</span>
+                                         </div>
+                                 </div>
+                             </div>
+                         </div>`
+                  });
+                  $("#productalani").html(deger);
+
+            })
+        });
+    })
 </script>
