@@ -14,11 +14,12 @@ namespace EcommerceCore.Models
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Lütfen email giriniz")]
         public string Email { get; set; }
-        [Display(Name = "Şifre")]
-        [Required(ErrorMessage = "Lütfen şife giriniz")]
-        public string UserName { get; set; }
+
         [Display(Name = "Kullanıcı adı")]
         [Required(ErrorMessage = "Lütfen kullanıcı adı giriniz")]
+        public string UserName { get; set; }
+        [Display(Name = "Şifre")]
+        [Required(ErrorMessage = "Lütfen şife giriniz")]
         public string Password { get; set; }
         [Display(Name = "Doğum tarihi")]
         [Required(ErrorMessage = "Lütfen doğum tarihi giriniz")]
