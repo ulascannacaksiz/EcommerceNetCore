@@ -25,5 +25,7 @@ namespace EntityLayer.Concrete
         public int CartNumber { get; set; }
         public string Cargo { get; set; }
         public string CargoTracking { get; set; }
+        public int OrderNumber { get; set; }
+        public DateTime DeliveryDate{ get; set; }
     }
 }
