@@ -1,5 +1,6 @@
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,14 @@ namespace EcommerceCore
                 x.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<Context>();
             services.AddControllersWithViews();
+            services.AddSession();
+            
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Login/Index");
+            services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+            {
+                x.LoginPath = "/Login/Index";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,10 +58,12 @@ namespace EcommerceCore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

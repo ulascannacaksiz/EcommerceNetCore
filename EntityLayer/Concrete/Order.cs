@@ -22,7 +22,7 @@ namespace EntityLayer.Concrete
         public Address Address { get; set; }
         public string UserIP { get; set; }
         public string PaymentMethod { get; set; }
-        public int CartNumber { get; set; }
+        public string CartNumber { get; set; }
         public string Cargo { get; set; }
         public string CargoTracking { get; set; }
         public int OrderNumber { get; set; }

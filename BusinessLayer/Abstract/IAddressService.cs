@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IAddressService:IGenericService<Address>
     {
+        List<Address> GetListAddressesByParameter(int person_id);
     }
 }

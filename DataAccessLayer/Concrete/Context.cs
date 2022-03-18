@@ -15,6 +15,10 @@ namespace DataAccessLayer.Concrete
         {
             optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=Eticaret;Integrated Security=True;");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }

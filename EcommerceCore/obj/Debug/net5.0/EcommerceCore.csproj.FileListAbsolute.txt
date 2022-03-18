@@ -169,3 +169,4 @@ C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Login\Index.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\MyAccount\Index.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\Orders\Default.cshtml.g.cs
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\Address\Default.cshtml.g.cs

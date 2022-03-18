@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IProvinceService:IGenericService<Province>
     {
+        List<Province> GetProvinceListByCityId(int id);    
     }
 }

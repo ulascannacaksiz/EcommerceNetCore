@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IAddressDal:IGenericDal<Address>
     {
+        List<Address> GetAddressesWithCityAndProvince(int id);
     }
 }

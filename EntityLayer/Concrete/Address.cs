@@ -19,7 +19,7 @@ namespace EntityLayer.Concrete
         public int? ProvinceId{ get; set; }
         public virtual Province Province { get; set; }
         public string AddressDescription { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public string PersonName { get; set; }
         public string PersonSurname { get; set; }
         public bool Status { get; set; }

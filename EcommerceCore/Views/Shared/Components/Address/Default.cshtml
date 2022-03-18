@@ -1,0 +1,132 @@
+﻿@model List<EntityLayer.Concrete.Address>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card card-dashboard">
+            <div class="card-body">
+                <a href="#" class="card-title" id="add-new"> Yeni Adres Ekle <i class="icon-map-marker"></i></a>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-6">
+            <div class="card card-dashboard">
+                <div class="card-body">
+                    <h3 class="card-title">@item.Name</h3><!-- End .card-title -->
+
+                <p>
+                        @item.PersonName @item.PersonSurname<br>
+                        @item.AddressDescription<br>
+                        @item.City.CityName<br>
+                        @item.Province.ProvinceName<br>
+                        @item.Phone<br>
+                        <a href="#">Düzenle <i class="icon-edit"></i></a>
+                    </p>
+                </div><!-- End .card-body -->
+        </div><!-- End .card-dashboard -->
+    </div>
+
+        <!-- End .col-lg-6 -->
+    }
+</div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $("#add-new").click(()=>{
+        $.ajax({
+            url:"/Adress/GetCityList/",
+            method:"get",
+            success:((p)=>{
+                var parsed = JSON.parse(p);
+                var options="<option>Seçiniz</option>";
+               $.each(parsed, function(i, item){
+                    options+=`<option value="${item.Id}">${item.CityName}</option>`;
+                })
+                $("#iller").html(options);
+            })
+        });
+
+    Swal.fire({
+      title: '<strong>Yeni Adres Ekle</strong>',
+      width: 600,
+      icon: 'info',
+      html:`<form id="frmekle"><div class="form-group">
+    <label>Adres Başlığı</label>
+    <input type="text" name="name" id="name" class="form-control">
+</div>
+<div class="form-group">
+    <label>İsim</label>
+    <input type="text" name="person_name" id="person_name" class="form-control">
+</div>
+<div class="form-group">
+    <label>Soyisim</label>
+    <input type="text" name="person_surname" id="person_surname" class="form-control">
+</div>
+<div class="form-group">
+    <label>Telefon</label>
+    <input type="text" name="phone" id="phone" class="form-control">
+</div>
+<div class="form-group">
+    <label>İl</label>
+    <select class="form-control" id="iller">
+        <option>Seçiniz</option>
+
+    </select>
+</div>
+<div class="form-group">
+    <label>İlçe</label>
+    <select class="form-control" id="ilceler">
+        <option>Seçiniz</option>
+    </select>
+</div>
+<div class="form-group">
+    <label>Adres</label>
+    <textarea name="adress" id="adress" cols="10" rows="5" class="form-control"></textarea>
+</div>
+<input type="submit" value="Ekle" class="btn btn-info">
+</form>`,
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Great!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+        '<i class="fa fa-thumbs-down"></i>',
+      cancelButtonAriaLabel: 'Thumbs down'
+    })
+            $('#iller').on('change', function() {
+                $.ajax({
+                    url:"/Adress/GetProviceListByCityId/"+this.value,
+                    method:"get",
+                    success:((p)=>{
+                        var parsed = JSON.parse(p);
+                        var options="<option>Seçiniz</option>";
+                        $.each(parsed, function(i, item){
+                            options+=`<option value="${item.Id}">${item.ProvinceName}</option>`;
+                        })
+                        $("#ilceler").html(options);
+                    })
+                })
+        });
+        $("#frmekle").submit(()=>{
+            let frmdata = {
+                Name:$("#name").val(),
+                CityId:$("#iller").val(),
+                ProvinceId:$("#ilceler").val(),
+                AddressDescription:$("#adress").val(),
+                Phone:$("#phone").val(),
+                PesonName:$("#person_name").val(),
+                PersonSurname:$("#person_surname").val(),
+            };
+            $.ajax({
+                url:"/Adress/AddAddress/",
+                method:"Post",
+                data:frmdata,
+                success:((e)=>{
+                    console.log(e)
+                })
+            });
+        });
+    })
+</script>
