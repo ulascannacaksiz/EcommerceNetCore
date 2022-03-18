@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-
+using System.Threading.Tasks;
 
 namespace EcommerceCore.Controllers
 {
@@ -17,6 +17,12 @@ namespace EcommerceCore.Controllers
         ProvinceManager pm = new ProvinceManager(new EfProvinceRepository());
         AddressManager adm = new AddressManager(new EfAddressRepository());
         private readonly UserManager<User> _userManager;
+
+        public AdressController(UserManager<User> userManager)
+        {
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -34,12 +40,13 @@ namespace EcommerceCore.Controllers
             return Json(result);
         }
         [HttpPost]
-        public IActionResult AddAddress(Address p)
+        public async Task <IActionResult> AddAddress(Address p)
         {
-            //var id = _userManager.GetUserId(User);
-            
+            var username = User.Identity.Name;
+            //var user = _userManager.GetUserAsync(HttpContext.User).Result;
+            var user = await _userManager.FindByNameAsync(username);
             p.Status = true;
-            //p.UserId = Int16.Parse(id);
+            p.UserId = user.Id;
             adm.TAdd(p);
             return View();
         }

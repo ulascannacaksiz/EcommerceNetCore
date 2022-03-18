@@ -116,7 +116,7 @@
                 ProvinceId:$("#ilceler").val(),
                 AddressDescription:$("#adress").val(),
                 Phone:$("#phone").val(),
-                PesonName:$("#person_name").val(),
+                PersonName:$("#person_name").val(),
                 PersonSurname:$("#person_surname").val(),
             };
             $.ajax({
@@ -127,6 +127,7 @@
                     console.log(e)
                 })
             });
+            return false;
         });
     })
 </script>
