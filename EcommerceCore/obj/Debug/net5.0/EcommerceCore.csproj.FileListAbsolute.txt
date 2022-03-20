@@ -170,3 +170,7 @@ C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\MyAccount\Index.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\Orders\Default.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\Address\Default.cshtml.g.cs
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\FluentValidation.dll
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\EcommerceCore.MvcApplicationPartsAssemblyInfo.cs

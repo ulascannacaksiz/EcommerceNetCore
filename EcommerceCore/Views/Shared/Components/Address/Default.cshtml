@@ -1,4 +1,5 @@
-﻿@model List<EntityLayer.Concrete.Address>
+﻿@using EntityLayer.Concrete
+@model Address
 
 <div class="row">
     <div class="col-lg-6">
@@ -8,20 +9,20 @@
             </div>
         </div>
     </div>
-    @foreach (var item in Model)
+
+    @foreach (Address address in ViewBag.Adres)
     {
         <div class="col-lg-6">
             <div class="card card-dashboard">
                 <div class="card-body">
-                    <h3 class="card-title">@item.Name</h3><!-- End .card-title -->
-
+                    <h3 class="card-title">@address.Name</h3><!-- End .card-title -->
                 <p>
-                        @item.PersonName @item.PersonSurname<br>
-                        @item.AddressDescription<br>
-                        @item.City.CityName<br>
-                        @item.Province.ProvinceName<br>
-                        @item.Phone<br>
-                        <a href="#">Düzenle <i class="icon-edit"></i></a>
+                        @address.PersonName @address.PersonSurname<br>
+                        @address.AddressDescription<br>
+                        @address.City.CityName<br>
+                        @address.Province.ProvinceName<br>
+                        @address.Phone<br>
+                        <a href="#" id="@address.Id"  name="dznlebtn">Düzenle <i class="icon-edit"></i></a>
                     </p>
                 </div><!-- End .card-body -->
         </div><!-- End .card-dashboard -->
@@ -50,51 +51,63 @@
       title: '<strong>Yeni Adres Ekle</strong>',
       width: 600,
       icon: 'info',
-      html:`<form id="frmekle"><div class="form-group">
-    <label>Adres Başlığı</label>
-    <input type="text" name="name" id="name" class="form-control">
-</div>
-<div class="form-group">
-    <label>İsim</label>
-    <input type="text" name="person_name" id="person_name" class="form-control">
-</div>
-<div class="form-group">
-    <label>Soyisim</label>
-    <input type="text" name="person_surname" id="person_surname" class="form-control">
-</div>
-<div class="form-group">
-    <label>Telefon</label>
-    <input type="text" name="phone" id="phone" class="form-control">
-</div>
-<div class="form-group">
-    <label>İl</label>
-    <select class="form-control" id="iller">
-        <option>Seçiniz</option>
-
-    </select>
-</div>
-<div class="form-group">
-    <label>İlçe</label>
-    <select class="form-control" id="ilceler">
-        <option>Seçiniz</option>
-    </select>
-</div>
-<div class="form-group">
-    <label>Adres</label>
-    <textarea name="adress" id="adress" cols="10" rows="5" class="form-control"></textarea>
-</div>
-<input type="submit" value="Ekle" class="btn btn-info">
-</form>`,
+      html:`
+              <form id="frmekle">
+                    <div class="form-group">
+                      <label>Adres Başlığı</label>
+                      <input type="text" name="name" id="name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label>İsim</label>
+                      <input
+                        type="text"
+                        name="person_name"
+                        id="person_name"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Soyisim</label>
+                      <input
+                        type="text"
+                        name="person_surname"
+                        id="person_surname"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Telefon</label>
+                      <input type="text" name="phone" id="phone" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label>İl</label>
+                      <select class="form-control" id="iller">
+                        <option>Seçiniz</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>İlçe</label>
+                      <select class="form-control" id="ilceler">
+                        <option>Seçiniz</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Adres</label>
+                      <textarea
+                        name="adress"
+                        id="adress"
+                        cols="10"
+                        rows="5"
+                        class="form-control"
+                      ></textarea>
+                    </div>
+                    <input type="submit" value="Ekle" class="btn btn-info" />
+              </form>
+        `,
       showCloseButton: true,
       showCancelButton: true,
       focusConfirm: false,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Great!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-        '<i class="fa fa-thumbs-down"></i>',
-      cancelButtonAriaLabel: 'Thumbs down'
-    })
+     })
             $('#iller').on('change', function() {
                 $.ajax({
                     url:"/Adress/GetProviceListByCityId/"+this.value,
@@ -129,5 +142,149 @@
             });
             return false;
         });
+    })
+</script>
+
+<script>
+    
+    $("[name='dznlebtn']").click((e)=>{
+        //e.preventDefault();
+        let id = e.target.id;
+        let item;
+        $.ajax({
+            async:false,
+            method:"post",
+            url:"/Adress/GetAddressByAddressId/",
+            data:{id:id},
+            success:((d)=>{
+                item = JSON.parse(d);
+            })
+        })
+    Swal.fire({
+        title:'Adres Güncelle',
+        icon:'info',
+        width: 600,
+        showCancelButton:true,
+        html:`
+        <form id="frmguncelle">
+        <div><ul id="error"></ul></div>
+        <div class="form-group">
+        <label>Adres Başlığı</label>
+        <input type="text" name="name" id="name" class="form-control" value="${item[0].Name}" />
+        </div>
+        <div class="form-group">
+        <label>İsim</label>
+        <input
+        type="text"
+        name="person_name"
+        id="person_name"
+        class="form-control"
+        value="${item[0].PersonName}"
+        />
+        </div>
+        <div class="form-group">
+        <label>Soyisim</label>
+        <input
+        type="text"
+        name="person_surname"
+        id="person_surname"
+        class="form-control"
+        value="${item[0].PersonSurname}"
+        />
+        </div>
+        <div class="form-group">
+        <label>Telefon</label>
+        <input type="text" name="phone" id="phone" class="form-control" value="${item[0].Phone}" />
+        </div>
+        <div class="form-group">
+        <label>İl</label>
+        <select class="form-control" id="iller1">
+        <option>Seçiniz</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>İlçe</label>
+        <select class="form-control" id="ilceler">
+        <option>Seçiniz</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Adres</label>
+        <textarea
+        name="adress"
+        id="adress"
+        cols="10"
+        rows="5"
+        class="form-control"
+        >${item[0].AddressDescription}</textarea>
+        </div>
+        <input type="submit" value="Güncelle" class="btn btn-info" />
+        </form>
+        `
+        })
+
+         $.ajax({
+            async:false,
+            url:"/Adress/GetCityList/",
+            method:"get",
+            success:((p)=>{
+                var parsed = JSON.parse(p);
+                var options="<option>Seçiniz</option>";
+               $.each(parsed, function(i, data){
+                   if(data.Id===item[0].CityId){
+                       options+=`<option value="${data.Id}" selected>${data.CityName}</option>`;
+                   }
+                    options+=`<option value="${data.Id}">${data.CityName}</option>`;
+                })
+                $("#iller1").html(options);
+            })
+        });
+            $.ajax({
+            async:false,
+            url:"/Adress/GetProviceListByCityId/"+item[0].CityId,
+            method:"get",
+            success:((p)=>{
+                var parsed = JSON.parse(p);
+                var options="<option>Seçiniz</option>";
+               $.each(parsed, function(i, data){
+                   if(data.Id===item[0].ProvinceId){
+                       options+=`<option value="${data.Id}" selected>${data.ProvinceName}</option>`;
+                   }
+                    options+=`<option value="${data.Id}">${data.ProvinceName}</option>`;
+                })
+                $("#ilceler").html(options);
+            })
+        });
+
+        $('#frmguncelle').submit(()=>{
+            let frmdata = {
+                Id:id,
+                Name:$("#name").val(),
+                CityId:$("#iller1").val(),
+                ProvinceId:$("#ilceler").val(),
+                AddressDescription:$("#adress").val(),
+                Phone:$("#phone").val(),
+                PersonName:$("#person_name").val(),
+                PersonSurname:$("#person_surname").val(),
+            };
+            $.ajax({
+                method:"post",
+                url:"/Adress/UpdateAddress/",
+                data:frmdata,
+                success:((d)=>{
+                    console.log(d);
+                    if(d!="Başarılı"){
+                        $("#error").html(`<li class="text-danger">${d}</li>`);
+                    }else{
+                        Swal.fire({
+                            icon:'success',
+                            title:"Adres Güncellendi",
+
+                        })
+                    }
+                })
+            });
+            return false;
+        })
     })
 </script>

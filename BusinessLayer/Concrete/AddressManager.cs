@@ -45,7 +45,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Address t)
         {
-            throw new NotImplementedException();
+            _addressDal.Update(t);
         }
     }
 }

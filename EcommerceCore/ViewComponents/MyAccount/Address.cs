@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace EcommerceCore.ViewComponents.MyAccount
 {
@@ -10,7 +11,8 @@ namespace EcommerceCore.ViewComponents.MyAccount
         public IViewComponentResult Invoke()
         {
             var values = adm.GetListAddressesByParameter(4);
-            return View(values);
+            ViewBag.Adres = values;
+            return View();
         }
     }
 }

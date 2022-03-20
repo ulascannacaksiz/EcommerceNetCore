@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mtc4CRe0SKz4rAnsTEn7YmoTwZ8I4HJ2pMRuYA6UMzd+5SSkQIYE3865hihH4duuYN0HjF6CEIxs3aBo7nEaSQ==",
+  "dgSpecHash": "2siNNxBLH+h/9SsVLvwQ7xFQ1MlgDgbdLWHZySofgf7QOH1CPEBmUP6Dxy/Jv89dvJQMWMXFNlsh+f0DjikIuw==",
   "success": true,
   "projectFilePath": "C:\\Users\\UlasCan\\source\\repos\\EcommerceCore\\BusinessLayer\\BusinessLayer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\UlasCan\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",
+    "C:\\Users\\UlasCan\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.4.0\\fluentvalidation.aspnetcore.10.4.0.nupkg.sha512",
+    "C:\\Users\\UlasCan\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.4.0\\fluentvalidation.dependencyinjectionextensions.10.4.0.nupkg.sha512",
     "C:\\Users\\UlasCan\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\UlasCan\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\UlasCan\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",

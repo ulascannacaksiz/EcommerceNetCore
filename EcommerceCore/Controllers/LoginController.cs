@@ -11,21 +11,20 @@ namespace EcommerceCore.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
 
-        public LoginController(SignInManager<User> signInManager,UserManager<User> userManager)
+        public LoginController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
         }
-
-
 
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
-        public async Task <IActionResult> Index(LoginViewModel p)
+        public async Task<IActionResult> Index(LoginViewModel p)
         {
             if (ModelState.IsValid)
             {
@@ -42,8 +41,6 @@ namespace EcommerceCore.Controllers
                         return View();
                     }
                 }
-                
-
             }
             return View();
         }
