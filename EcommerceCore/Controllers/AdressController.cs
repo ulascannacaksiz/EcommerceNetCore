@@ -47,11 +47,24 @@ namespace EcommerceCore.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAddress(Address p)
         {
-            var username = User.Identity.Name;
-            var user = await _userManager.FindByNameAsync(username);
-            p.Status = true;
-            p.UserId = user.Id;
-            adm.TAdd(p);
+            AddressValidator av = new AddressValidator();
+            ValidationResult results = av.Validate(p);
+            if (results.IsValid)
+            {
+                var username = User.Identity.Name;
+                var user = await _userManager.FindByNameAsync(username);
+                p.Status = true;
+                p.UserId = user.Id;
+                adm.TAdd(p);
+                return Json(JsonConvert.SerializeObject("Başarılı"));
+            } else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                    return Json(JsonConvert.SerializeObject(item.ErrorMessage));
+                }
+            }
             return View();
         }
 

@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IOrderDal : IGenericDal<Order>
     {
+        List<Order> GetListWithProductByUserId(int id);
     }
 }

@@ -15,20 +15,19 @@
         <div class="col-lg-6">
             <div class="card card-dashboard">
                 <div class="card-body">
-                    <h3 class="card-title">@address.Name</h3><!-- End .card-title -->
+                    <h3 class="card-title">@address.Name</h3>
                 <p>
                         @address.PersonName @address.PersonSurname<br>
                         @address.AddressDescription<br>
                         @address.City.CityName<br>
                         @address.Province.ProvinceName<br>
                         @address.Phone<br>
-                        <a href="#" id="@address.Id"  name="dznlebtn">Düzenle <i class="icon-edit"></i></a>
+                        <a href="#" id="@address.Id" name="dznlebtn">Düzenle <i class="icon-edit"></i></a>
                     </p>
-                </div><!-- End .card-body -->
-        </div><!-- End .card-dashboard -->
+                </div>
+        </div>
     </div>
 
-        <!-- End .col-lg-6 -->
     }
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -53,6 +52,7 @@
       icon: 'info',
       html:`
               <form id="frmekle">
+                  <div><ul id="error"></ul></div>
                     <div class="form-group">
                       <label>Adres Başlığı</label>
                       <input type="text" name="name" id="name" class="form-control" />
@@ -105,7 +105,8 @@
               </form>
         `,
       showCloseButton: true,
-      showCancelButton: true,
+      showCancelButton: false,
+      showConfirmButton:false,
       focusConfirm: false,
      })
             $('#iller').on('change', function() {
@@ -136,8 +137,16 @@
                 url:"/Adress/AddAddress/",
                 method:"Post",
                 data:frmdata,
-                success:((e)=>{
-                    console.log(e)
+                success:((d)=>{
+                    d = JSON.parse(d)
+                    if(d!="Başarılı"){
+                        $("#error").html(`<li class="text-danger">${d}</li>`);
+                    }else{
+                        Swal.fire({
+                            icon:'success',
+                            title:"Adres Güncellendi",
+                        })
+                    }
                 })
             });
             return false;
@@ -146,7 +155,7 @@
 </script>
 
 <script>
-    
+
     $("[name='dznlebtn']").click((e)=>{
         //e.preventDefault();
         let id = e.target.id;
@@ -164,7 +173,8 @@
         title:'Adres Güncelle',
         icon:'info',
         width: 600,
-        showCancelButton:true,
+        showCancelButton:false,
+        showConfirmButton:false,
         html:`
         <form id="frmguncelle">
         <div><ul id="error"></ul></div>
@@ -272,14 +282,13 @@
                 url:"/Adress/UpdateAddress/",
                 data:frmdata,
                 success:((d)=>{
-                    console.log(d);
+                    d = JSON.parse(d)
                     if(d!="Başarılı"){
                         $("#error").html(`<li class="text-danger">${d}</li>`);
                     }else{
                         Swal.fire({
                             icon:'success',
                             title:"Adres Güncellendi",
-
                         })
                     }
                 })
