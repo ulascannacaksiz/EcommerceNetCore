@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace EcommerceCore.Controllers
 {
-    public class RegisterController : Controller
+    public class AccountController : Controller
     {
+        private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
 
-        public RegisterController(UserManager<User> userManager)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
+            _signInManager = signInManager;
             _userManager = userManager;
         }
 
@@ -50,6 +52,28 @@ namespace EcommerceCore.Controllers
                 }
             }
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel p)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(p.Email);
+                if (user != null)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(user, p.Password, false, true);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "MyAccount");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Account");
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Account");
         }
     }
 }

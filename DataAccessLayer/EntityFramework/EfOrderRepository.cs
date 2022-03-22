@@ -16,7 +16,7 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                return c.Orders.Include(x => x.Product).Where(y => y.UserId == id).ToList();
+                return c.Orders.Include(x => x.Product).Include(d=>d.Product.Image).Where(c=>c.Product.Image.CoverStatus==true).Where(y => y.UserId == id).ToList();
             }
         }
     }

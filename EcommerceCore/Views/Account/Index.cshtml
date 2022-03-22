@@ -18,20 +18,20 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                        @*                        <form action="#">
+                          <form method="post" asp-action="Login" asp-controller="Account">
                             <div class="form-group">
-                            <label for="singin-email-2">Username or email address *</label>
-                            <input type="text" class="form-control" id="singin-email-2" name="singin-email" required>
+                            <label for="singin-email-2">Email *</label>
+                            <input type="text" class="form-control" id="singin-email-2" asp-for="Email" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-group">
-                            <label for="singin-password-2">Password *</label>
-                            <input type="password" class="form-control" id="singin-password-2" name="singin-password" required>
+                            <label for="singin-password-2">Şifre *</label>
+                            <input type="password" class="form-control" id="singin-password-2" asp-for="Password" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-footer">
                             <button type="submit" class="btn btn-outline-primary-2">
-                            <span>LOG IN</span>
+                            <span>Giriş yap</span>
                             <i class="icon-long-arrow-right"></i>
                             </button>
 
@@ -42,7 +42,7 @@
 
                             <a href="#" class="forgot-link">Forgot Your Password?</a>
                             </div><!-- End .form-footer -->
-                            </form>*@
+                            </form>
                         <div class="form-choice">
                             <p class="text-center">or sign in with</p>
                             <div class="row">
@@ -62,7 +62,7 @@
                         </div><!-- End .form-choice -->
                     </div><!-- .End .tab-pane -->
                     <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
-                        <form method="post">
+                        <form method="post" asp-action="Index" asp-controller="Account">
                             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                             <div class="form-group">
                                 <label for="name">Adınız</label>
@@ -126,9 +126,9 @@
     </div><!-- End .container -->
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 $("#signin-tab-2").click(()=>{
     location.href = "/Login/Index";
 })
-</script>
+</script>*@
