@@ -73,7 +73,7 @@
                         </div><!-- End .details-filter-row -->
 
                         <div class="product-details-action">
-                            <a href="#" class="btn-product btn-cart"><span>Sepete Ekle</span></a>
+                            <a href="#" name="addcart"  class="btn-product btn-cart"><span id="@item.Id">Sepete Ekle</span></a>
 
                             <div class="details-action-wrapper">
                                 <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Listeme Ekle</span></a>
@@ -393,4 +393,23 @@
         </div><!-- End .owl-carousel -->
     </div><!-- End .container -->
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $("[name='addcart']").click((e)=>{
+        e.preventDefault();
+         let id = e.target.id;
+         $.ajax({
+             url:"/Cart/AddToChart/",
+             method:"Post",
+             data: {productId:id},
+             success: (()=>{
+                    Swal.fire(
+                    'Başarılı!',
+                    'Ürün sepetine eklendi',
+                    'success'
+                    );
+             })
+         })
+    });
 
+</script>

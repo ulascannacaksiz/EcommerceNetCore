@@ -6,8 +6,10 @@
 <div class="page-content">
     <div class="cart">
         <div class="container">
+         @if (Model != null){
             <div class="row">
                 <div class="col-lg-9">
+ 
                     <table class="table table-cart table-mobile">
                         <thead>
                             <tr>
@@ -20,32 +22,35 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td class="product-col">
-                                        <div class="product">
-                                            <figure class="product-media">
-                                                <a href="#">
-                                                    <img src="@item.Image.ImageUrl" alt="Product image">
-                                                </a>
-                                            </figure>
 
-                                            <h3 class="product-title">
-                                                <a href="#">@item.Title</a>
-                                            </h3><!-- End .product-title -->
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="product-col">
+                                            <div class="product">
+                                                <figure class="product-media">
+                                                    <a href="#">
+                                                        <img src="@item.Image.ImageUrl" alt="Product image">
+                                                    </a>
+                                                </figure>
+
+                                                <h3 class="product-title">
+                                                    <a href="#">@item.Title</a>
+                                                </h3><!-- End .product-title -->
                                     </div><!-- End .product -->
                                 </td>
-                                    <td class="price-col">@item.Price TL</td>
-                                    <td class="quantity-col">
-                                        <div class="cart-product-quantity">
-                                            <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                        </div><!-- End .cart-product-quantity -->
+                                        <td class="price-col">@item.Price TL</td>
+                                        <td class="quantity-col">
+                                            <div class="cart-product-quantity">
+                                                <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                            </div><!-- End .cart-product-quantity -->
                                 </td>
-                                    <td class="total-col">@item.Price TL</td>
-                                    <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-                                </tr>
-                            }
+                                        <td class="total-col">@item.Price TL</td>
+                                        <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
+                                    </tr>
+                                }
+
+
 
 
                         </tbody>
@@ -126,6 +131,17 @@
                     <a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>ALIŞVERİŞE DEVAM ET</span><i class="icon-refresh"></i></a>
                 </aside><!-- End .col-lg-3 -->
             </div><!-- End .row -->
+                               }
+                            @if (Model == null)
+                            {
+                                <div class="text-center mt-5">
+                                    <i class="fa-solid fa-cart-shopping fa-5x"></i>
+                               <h4>Sepetin şu an boş</h4> 
+                               <h5>
+                                Sepetini UlasShopun fırsatlarla dolu dünyasından doldurmak için
+                                aşağıdaki ürünleri incelemeye başlayabilirsin.</h5>
+                                </div>
+                            }
         </div><!-- End .container -->
     </div><!-- End .cart -->
 </div>

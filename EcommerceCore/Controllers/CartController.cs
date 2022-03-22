@@ -14,15 +14,14 @@ namespace EcommerceCore.Controllers
         public IActionResult Index()
         {
             string cookiecart = HttpContext.Request.Cookies["cart"];
+
             var values = pm.GetProductAllWithImage();
-            //var cartItem=Product;
             List<Product> deneme = new List<Product>();
             if (cookiecart != null)
             {
                 string[] products = cookiecart.Split(',');
                 foreach(var p in products)
                 {
-                    // cartItem += values.Find(x=>x.Id.ToString() == p);
                     deneme.Add(values.Where(x => x.Id.ToString() == p).FirstOrDefault());
                 }
                 return View(deneme);
@@ -31,19 +30,20 @@ namespace EcommerceCore.Controllers
 
         }
 
-        public IActionResult AddToChart(int product_id)
+        [HttpPost]
+        public IActionResult AddToChart(string productId)
         {
             string cookiecart = HttpContext.Request.Cookies["cart"];
             if (cookiecart != null)
             {
-                cookiecart += ',' + product_id;
+                cookiecart += ',' + productId;
                 HttpContext.Response.Cookies.Append("cart", cookiecart);
             }
             else
             {
-                HttpContext.Response.Cookies.Append("cart", product_id.ToString());
+                HttpContext.Response.Cookies.Append("cart", productId.ToString());
             }
-            return View();
+            return Json("Başarılı");
         }
     }
 }
