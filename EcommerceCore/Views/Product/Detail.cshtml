@@ -398,10 +398,12 @@
     $("[name='addcart']").click((e)=>{
         e.preventDefault();
          let id = e.target.id;
+         let qty = $('#qty').val();
+         console.log(qty);
          $.ajax({
              url:"/Cart/AddToChart/",
              method:"Post",
-             data: {productId:id},
+             data: {productId:id,q:qty},
              success: (()=>{
                     Swal.fire(
                     'Başarılı!',
