@@ -176,9 +176,12 @@
         let count = e.target.value;
         let id  = e.target.previousSibling.previousSibling.value;
         $.ajax({
-            url:"",
-            method:"",
-            data:"",
+            url:"/Cart/UpdateCart/",
+            method:"Post",
+            data:{productId:id,q:count},
+            success:((d)=>{
+                console.log(d)
+            })
         })
     })
 </script>

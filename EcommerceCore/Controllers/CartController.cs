@@ -12,7 +12,8 @@ namespace EcommerceCore.Controllers
     public class CartController : Controller
     {
         ProductManager pm = new ProductManager(new EfProductRepository());
-        public class Cookie{
+        public class Cookie
+        {
             public int Id { get; set; }
             public int Total { get; set; }
         }
@@ -30,7 +31,7 @@ namespace EcommerceCore.Controllers
             ViewBag.v1 = list;
             if (cookiecart != null)
             {
-               
+
                 foreach (var item in list)
                 {
                     products.Add(values.Where(x => x.Id == item.Id).FirstOrDefault());
@@ -43,26 +44,36 @@ namespace EcommerceCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToChart(string productId,string q)
+        public IActionResult AddToChart(string productId, string q)
         {
-            /*
-            var cookiecart1 = "id:" + "1" + "q:" + "5";
-            var result = JsonConvert.SerializeObject(cookiecart1);
-            HttpContext.Response.Cookies.Append("cart", result);
-             */
-            
             string cookiecart = HttpContext.Request.Cookies["cart"];
-            if (cookiecart != null)
+            if (cookiecart != null && Convert.ToInt32(productId)!=0)
             {
                 var list = JsonConvert.DeserializeObject<List<Cookie>>(cookiecart);
-                //List<Cookie> cookies = new List<Cookie>();
-                list.Add(new Cookie()
+                foreach (var item in list)
                 {
-                    Id = Convert.ToInt32(productId),
-                    Total=Convert.ToInt32(q),
-                });
-                var result = JsonConvert.SerializeObject(list);
-                HttpContext.Response.Cookies.Append("cart", result);
+                    if (item.Id.ToString() != productId)
+                    {
+                        list.Add(new Cookie()
+                        {
+                            Id = Convert.ToInt32(productId),
+                            Total = Convert.ToInt32(q),
+                        });
+                        var result = JsonConvert.SerializeObject(list);
+                        HttpContext.Response.Cookies.Append("cart", result);
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(productId) != 0)
+                        {
+                            var selecteditem = list.FirstOrDefault(x => x.Id.ToString() == productId);
+                            selecteditem.Total += Convert.ToInt32(q);
+                            var result = JsonConvert.SerializeObject(list);
+                            HttpContext.Response.Cookies.Append("cart", result);
+                        }
+                    }
+                }
+
             }
             else
             {
@@ -75,6 +86,33 @@ namespace EcommerceCore.Controllers
                 var result = JsonConvert.SerializeObject(cookies);
                 HttpContext.Response.Cookies.Append("cart", result);
                 return Json(result);
+            }
+            return Json("Başarılı");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCart(string productId, string q)
+        {
+            var cookiecart = HttpContext.Request.Cookies["cart"];
+            if (cookiecart != null)
+            {
+                var list = JsonConvert.DeserializeObject<List<Cookie>>(cookiecart);
+
+                if (Convert.ToInt32(q) != 0)
+                {
+                    var selecteditem = list.FirstOrDefault(x => x.Id.ToString() == productId);
+                    selecteditem.Total = Convert.ToInt32(q);
+                    var result = JsonConvert.SerializeObject(list);
+                    HttpContext.Response.Cookies.Append("cart", result);
+                }
+                else
+                {
+                    var itemToRemove = list.Single(r => r.Id == Convert.ToInt32(productId));
+                    list.Remove(itemToRemove);
+                    var result = JsonConvert.SerializeObject(list);
+                    HttpContext.Response.Cookies.Append("cart", result);
+                }
+
             }
             return Json("Başarılı");
         }
