@@ -174,3 +174,4 @@ C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\bin\Debug\net5.0\Fluen
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\EcommerceCore.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Cart\Index.cshtml.g.cs
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\CartDropdown\Default.cshtml.g.cs

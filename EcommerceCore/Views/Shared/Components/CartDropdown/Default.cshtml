@@ -1,0 +1,66 @@
+﻿@model List<EntityLayer.Concrete.Product>
+@{
+    int toplam = 0;
+}
+<div class="dropdown cart-dropdown">
+    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+        <div class="icon">
+            <i class="icon-shopping-cart"></i>
+            <span class="cart-count">1</span>
+        </div>
+        <p>Sepet</p>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-cart-products">
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="product">
+                        <div class="product-cart-details">
+                            <h4 class="product-title">
+                                <a href="/Product/Detail/@item.Id">@item.Title</a>
+                            </h4>
+                            @foreach (var viewb in ViewBag.v1)
+                            {
+                                if (item.Id == viewb.Id)
+                                {
+                                    <span class="cart-product-info">
+                                        <span class="cart-product-qty">@viewb.Total</span>
+                                        x @item.Price
+                                    </span>
+                                    toplam += item.Price * viewb.Total;
+                                }
+
+                            }
+
+                        </div>
+
+                        <figure class="product-image-container">
+                            <a href="product.html" class="product-image">
+                                <img src="@item.Image.ImageUrl" alt="product">
+                            </a>
+                        </figure>
+                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                    </div>
+
+                    <!-- End .product -->
+                }
+
+            }
+
+        </div>
+
+        <div class="dropdown-cart-total">
+            <span>Toplam</span>
+
+            <span class="cart-total-price">@toplam TL</span>
+        </div><!-- End .dropdown-cart-total -->
+
+        <div class="dropdown-cart-action">
+            <a href="/Cart/Index" class="btn btn-primary">Sepet</a>
+            <a href="checkout.html" class="btn btn-outline-primary-2"><span>Ödeme</span><i class="icon-long-arrow-right"></i></a>
+        </div>
+    </div>
+</div>

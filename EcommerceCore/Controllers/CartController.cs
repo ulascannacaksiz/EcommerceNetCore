@@ -17,24 +17,27 @@ namespace EcommerceCore.Controllers
             public int Id { get; set; }
             public int Total { get; set; }
         }
-        public class CookieItem
-        {
-            public List<Cookie> Cookies { get; set; }
-        }
+        //public class CookieItem
+        //{
+        //    public List<Cookie> Cookies { get; set; }
+        //}
 
         public IActionResult Index()
         {
             var cookiecart = HttpContext.Request.Cookies["cart"];
-            var list = JsonConvert.DeserializeObject<List<Cookie>>(cookiecart);//BURASI DÜZGÜN ÇALIŞIYOR BURDAN GERİ KALAN İŞLEMLERİ YAP ALTAKİ FOREACH ÇALIŞIYPOR
             var values = pm.GetProductAllWithImage();
             List<Product> products = new List<Product>();
-            ViewBag.v1 = list;
+
             if (cookiecart != null)
             {
-
+                var list = JsonConvert.DeserializeObject<List<Cookie>>(cookiecart);//BURASI DÜZGÜN ÇALIŞIYOR BURDAN GERİ KALAN İŞLEMLERİ YAP ALTAKİ FOREACH ÇALIŞIYPOR
+                ViewBag.v1 = list;
                 foreach (var item in list)
                 {
-                    products.Add(values.Where(x => x.Id == item.Id).FirstOrDefault());
+                    if (item.Id != 0)
+                    {
+                        products.Add(values.Where(x => x.Id == item.Id).FirstOrDefault());
+                    }
                 }
                 return View(products);
             }
@@ -47,7 +50,7 @@ namespace EcommerceCore.Controllers
         public IActionResult AddToChart(string productId, string q)
         {
             string cookiecart = HttpContext.Request.Cookies["cart"];
-            if (cookiecart != null && Convert.ToInt32(productId)!=0)
+            if (cookiecart != null && cookiecart != "[]" && Convert.ToInt32(productId) != 0)
             {
                 var list = JsonConvert.DeserializeObject<List<Cookie>>(cookiecart);
                 foreach (var item in list)
@@ -61,6 +64,7 @@ namespace EcommerceCore.Controllers
                         });
                         var result = JsonConvert.SerializeObject(list);
                         HttpContext.Response.Cookies.Append("cart", result);
+                        return Json(result);
                     }
                     else
                     {
@@ -70,10 +74,23 @@ namespace EcommerceCore.Controllers
                             selecteditem.Total += Convert.ToInt32(q);
                             var result = JsonConvert.SerializeObject(list);
                             HttpContext.Response.Cookies.Append("cart", result);
+                            return Json(result);
                         }
                     }
                 }
 
+            }
+            else if (cookiecart == "[]" && Convert.ToInt32(productId) != 0)
+            {
+                List<Cookie> cookies = new List<Cookie>();
+                cookies.Add(new Cookie()
+                {
+                    Id = Convert.ToInt32(productId),
+                    Total = Convert.ToInt32(q),
+                });
+                var result = JsonConvert.SerializeObject(cookies);
+                HttpContext.Response.Cookies.Append("cart", result);
+                return Json(result);
             }
             else
             {

@@ -36,13 +36,13 @@
                                         <td class="product-col">
                                             <div class="product">
                                                 <figure class="product-media">
-                                                    <a href="#">
+                                                    <a href="/Product/Detail/@item.Id">
                                                         <img src="@item.Image.ImageUrl" alt="Product image">
                                                     </a>
                                                 </figure>
 
                                                 <h3 class="product-title">
-                                                    <a href="#">@item.Title</a>
+                                                    <a href="/Product/Detail/@item.Id">@item.Title</a>
                                                 </h3><!-- End .product-title -->
                                     </div><!-- End .product -->
                                 </td>
@@ -53,7 +53,7 @@
                                             {
                                                 <td class="quantity-col">
                                                     <div class="cart-product-quantity">
-                                                        <input type="hidden" id="@item.Id" value="@item.Id"/>
+                                                        <input type="hidden" id="@item.Id" value="@item.Id" />
                                                         <input type="number" id="cnt" class="form-control cnt" value="@viewb.Total" min="1" max="10" step="1" data-decimals="0" required>
 
                                                     </div><!-- End .cart-product-quantity -->
@@ -62,7 +62,7 @@
                                                 toplam += item.Price * viewb.Total;
 
                                                 <td class="total-col">@(item.Price * viewb.Total) TL</td>
-                                                <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
+                                                <td class="remove-col"><button class="btn-remove" id="@item.Id"><i class="icon-close" id="@item.Id"></i></button></td>
                                             }
                                         }
                                     </tr>
@@ -180,8 +180,19 @@
             method:"Post",
             data:{productId:id,q:count},
             success:((d)=>{
-                console.log(d)
+                 location.reload(); 
             })
+        })
+    })
+    $(".btn-remove").click((e)=>{
+        let id = e.target.id;
+          $.ajax({
+            url:"/Cart/UpdateCart/",
+            method:"Post",
+            data:{productId:id,q:0},
+            success:((d)=>{
+                 location.reload(); 
+          })
         })
     })
 </script>
