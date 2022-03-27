@@ -1,0 +1,32 @@
+﻿@model UserUpdateViewModel
+<form action="#">
+    <div class="row">
+        <div class="col-sm-6">
+            <label>İsim *</label>
+            <input type="text" class="form-control" asp-for="@Model.name"  required>
+        </div><!-- End .col-sm-6 -->
+
+        <div class="col-sm-6">
+            <label>Soyisim *</label>
+            <input type="text" class="form-control" asp-for="@Model.surname" required>
+        </div><!-- End .col-sm-6 -->
+    </div><!-- End .row -->
+
+    <label>Kullanıcı Adı *</label>
+    <input type="text" class="form-control" asp-for="@Model.username" required>
+    <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
+
+    <label>Email *</label>
+    <input type="email" class="form-control" asp-for="@Model.email" required>
+
+    <label>Şifre (Değiştirmek istemiyorsanız boş bırakın)</label>
+    <input type="password" class="form-control">
+
+    <label>Şifre tekrar (Değiştirmek istemiyorsanız boş bırakın)</label>
+    <input type="password" class="form-control">
+
+    <button type="submit" class="btn btn-outline-primary-2">
+        <span>GÜNCELLE</span>
+        <i class="icon-long-arrow-right"></i>
+    </button>
+</form>

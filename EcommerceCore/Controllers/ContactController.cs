@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceCore.Controllers
@@ -17,9 +19,23 @@ namespace EcommerceCore.Controllers
         [HttpPost]
         public IActionResult Index(Contact p)
         {
-            p.Status = true;
-            cm.TAdd(p);
-            return RedirectToAction("Index","Home");
+            ContactValidator cv = new ContactValidator();
+            ValidationResult results = cv.Validate(p);
+            if (results.IsValid)
+            {
+                p.Status = true;
+                cm.TAdd(p);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                    //return Json(JsonConvert.SerializeObject(item.ErrorMessage));
+                }
+            }
+            return View();
         }
     }
 }

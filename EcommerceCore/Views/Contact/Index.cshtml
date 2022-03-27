@@ -1,4 +1,5 @@
-﻿@{
+﻿@model EntityLayer.Concrete.Contact
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
@@ -54,25 +55,29 @@
                         <div class="col-sm-4">
                             <label for="cname" class="sr-only">Name</label>
                             <input type="text" name="NameSurname" class="form-control" id="cname" placeholder="İsim *" required>
+                            @Html.ValidationMessageFor(x=>x.NameSurname,"",new { @class = "text-danger" })
                         </div><!-- End .col-sm-4 -->
 
                         <div class="col-sm-4">
                             <label for="cemail" class="sr-only">Name</label>
                             <input type="email" name="Email" class="form-control" id="cemail" placeholder="Email *" required>
+                            @Html.ValidationMessageFor(x=>x.Email,"",new { @class = "text-danger" })
                         </div><!-- End .col-sm-4 -->
 
                         <div class="col-sm-4">
                             <label for="cphone" class="sr-only">Phone</label>
                             <input type="tel" name="Phone" class="form-control" id="cphone" placeholder="Telefon">
+                            @Html.ValidationMessageFor(x=>x.Phone,"",new { @class = "text-danger" })
                         </div><!-- End .col-sm-4 -->
                     </div><!-- End .row -->
 
                     <label for="csubject" class="sr-only">Subject</label>
                     <input type="text" name="Title" class="form-control" id="csubject" placeholder="Konu">
+                    @Html.ValidationMessageFor(x=>x.Title,"",new { @class = "text-danger" })
 
                     <label for="cmessage" class="sr-only">Message</label>
                     <textarea class="form-control" name="Message" cols="30" rows="4" id="cmessage" required placeholder="Mesaj *"></textarea>
-
+                    @Html.ValidationMessageFor(x=>x.Message,"",new { @class = "text-danger" })
                     <div class="text-center">
                         <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
                             <span>Gönder</span>
