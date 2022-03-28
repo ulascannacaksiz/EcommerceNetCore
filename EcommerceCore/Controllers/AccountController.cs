@@ -1,5 +1,6 @@
 ﻿using EcommerceCore.Models;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -74,6 +75,22 @@ namespace EcommerceCore.Controllers
                 }
             }
             return RedirectToAction("Index", "Account");
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Update(UserUpdateViewModel p)
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.Name = p.name;
+            values.Surname = p.surname;
+            values.Email = p.email;
+            values.UserName = p.username;
+            if (p.password != null)
+            {
+                values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, p.password);
+            }
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "MyAccount");
         }
     }
 }
