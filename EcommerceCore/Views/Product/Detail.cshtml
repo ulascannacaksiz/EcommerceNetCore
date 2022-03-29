@@ -407,7 +407,7 @@
         e.preventDefault();
          let id = e.target.id;
          let qty = $('#qty').val();
-         console.log(qty);
+        
          $.ajax({
              url:"/Cart/AddToChart/",
              method:"Post",
@@ -429,12 +429,13 @@
              method:"Post",
              data: {productId:id},
              success: ((rd)=>{
-                 console.log(rd)
-                    Swal.fire(
-                    'Başarılı!',
-                    'Ürün istek listene eklendi',
-                    'success'
-                    );
+                 let parsed_data = JSON.parse(rd);
+                 
+                    Swal.fire({
+                        icon: parsed_data[0],
+                        title: parsed_data[1],
+                        text: parsed_data[2],
+                    });
              })
          })
     })

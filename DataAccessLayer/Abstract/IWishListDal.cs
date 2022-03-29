@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IWhisListDal : IGenericDal<WhisList>
+    public interface IWishListDal : IGenericDal<WhisList>
     {
+        List<WhisList> GetWhisListWithProduct(int userid);
     }
 }

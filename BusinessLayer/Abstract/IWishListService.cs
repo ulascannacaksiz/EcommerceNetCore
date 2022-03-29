@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IWhisListService:IGenericService<WhisList>
+    public interface IWishListService:IGenericService<WhisList>
     {
+        List<WhisList> GetListByUserId(int id);
     }
 }

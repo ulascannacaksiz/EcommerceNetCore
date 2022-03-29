@@ -9,18 +9,23 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class WhisListManager : IWhisListService
+    public class WishListManager : IWishListService
     {
-        IWhisListDal _whisListDal;
+        IWishListDal _whisListDal;
 
-        public WhisListManager(IWhisListDal whisListDal)
+        public WishListManager(IWishListDal whisListDal)
         {
             _whisListDal = whisListDal;
         }
 
         public List<WhisList> GetList()
         {
-            throw new NotImplementedException();
+            return _whisListDal.GetAll();
+        }
+
+        public List<WhisList> GetListByUserId(int id)
+        {
+            return _whisListDal.GetWhisListWithProduct(id);
         }
 
         public void TAdd(WhisList t)
@@ -35,12 +40,12 @@ namespace BusinessLayer.Concrete
 
         public WhisList TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _whisListDal.GetById(id);
         }
 
         public void TUpdate(WhisList t)
         {
-            throw new NotImplementedException();
+            _whisListDal.Update(t);
         }
     }
 }

@@ -11,10 +11,13 @@
                 <aside class="col-md-4 col-lg-3">
                     <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active"  id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Dashboard</a>
+                            <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab-orders-link"   data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Siparişlerim</a>
+                            <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Siparişlerim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-whislist-link" data-toggle="tab" href="#tab-whislist" role="tab" aria-controls="tab-whislist" aria-selected="false">İstek Listem</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Değerlendirmelerim</a>
@@ -34,13 +37,14 @@
                 <div class="col-md-8 col-lg-9">
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                            
                         </div><!-- .End .tab-pane -->
 
                         <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
-                           @await Component.InvokeAsync("Orders")
+                            @await Component.InvokeAsync("Orders")
                         </div><!-- .End .tab-pane -->
-
+                        <div class="tab-pane fade" id="tab-whislist" role="tabpanel" aria-labelledby="tab-whislist-link">
+                            @await Component.InvokeAsync("WhisList")
+                        </div><!-- .End .tab-pane -->
                         <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
                             <p>No downloads available yet.</p>
                             <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
@@ -48,7 +52,7 @@
 
                         <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
                             <p>Bu sayfada yapacağınız adres değişiklikleri, daha önce vermiş olduğunuz siparişleri etkilemez. Vermiş olduğunuz siparişin adres değişikliğini Siparişlerim alanından gerçekleştirebilirsiniz. </p>
-                            
+
                             @await Component.InvokeAsync("Address")
                         </div><!-- .End .tab-pane -->
 

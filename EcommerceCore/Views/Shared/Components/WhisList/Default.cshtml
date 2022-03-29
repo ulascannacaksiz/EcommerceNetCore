@@ -1,0 +1,55 @@
+﻿@model List<EntityLayer.Concrete.WhisList>
+<div class="col-md-12">
+
+    <table class="table table-wishlist table-mobile">
+        <thead>
+            <tr>
+                <th>Ürün</th>
+                <th>Fiyat</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+           {
+                if (item.Status == true)
+                {
+                    <tr>
+                        <td class="product-col">
+                    <div class="product">
+                        <figure class="product-media">
+                            <a href="/Product/Detail/@item.ProductId">
+                                <img src="@item.Product.Image.ImageUrl" alt="Product image">
+                            </a>
+                        </figure>
+
+                        <h3 class="product-title">
+                            <a href="/Product/Detail/@item.ProductId">@item.Product.Title</a>
+                        </h3>
+                    </div>
+                </td>
+                <td class="price-col">@item.Product.Price</td>
+                <td class="remove-col"><button class="btn-remove" id="@item.Id"><i class="icon-close"  id="@item.Id"></i></button></td>
+            </tr>
+            }
+            }
+        </tbody>
+    </table>
+
+</div>
+<script>
+    $(".btn-remove").click((e)=>{
+        e.preventDefault();
+        let id = e.target.id;
+        console.log(id);
+          $.ajax({
+            url:"/WishList/RemoveItem/",
+            method:"Post",
+            data:{id:id},
+            success:((d)=>{
+                 console.log(d);
+          })
+        })
+    })
+</script>
