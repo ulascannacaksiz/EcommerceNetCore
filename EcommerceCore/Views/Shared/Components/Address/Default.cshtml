@@ -12,10 +12,10 @@
 
     @foreach (Address address in ViewBag.Adres)
     {
-        <div class="col-lg-6">
+        <div class="col-lg-6" name="carddashboard">
             <div class="card card-dashboard">
                 <div class="card-body">
-                    <h3 class="card-title">@address.Name</h3>
+                    <h3 class="card-title">@address.Name </h3>
                 <p>
                         @address.PersonName @address.PersonSurname<br>
                         @address.AddressDescription<br>

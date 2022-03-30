@@ -177,3 +177,4 @@ C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\CartDropdown\Default.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\Account\Default.cshtml.g.cs
 C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Shared\Components\WhisList\Default.cshtml.g.cs
+C:\Users\UlasCan\source\repos\EcommerceCore\EcommerceCore\obj\Debug\net5.0\Razor\Views\Checkout\Index.cshtml.g.cs
