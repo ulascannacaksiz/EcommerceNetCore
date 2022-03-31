@@ -2,82 +2,94 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+
 <div class="page-content">
     <div class="container">
         <div class="col-md-12 ml-5 mt-4">
             <div class="row">
-                <div class="col-md-4">
-                    <a href="#" class="btn btn-outline-primary btn-round">Teslimat</a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#" class="btn btn-outline-primary btn-round">Ödeme</a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#" class="btn btn-outline-primary btn-round">Özet</a>
-                </div>
+                <ul class="nav mb-3 mb-md-0 col-md-12" role="tablist">
+                    <li class="nav-item col-md-4">
+                        <a class="btn btn-outline-primary btn-round" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="true">Teslimat</a>
+                    </li>
+                    <li class="nav-item  col-md-4">
+                        <a class="btn btn-outline-primary btn-round" id="tab-payment-link" data-toggle="tab" href="#tab-payment" role="tab" aria-controls="tab-payment" aria-selected="false">Ödeme</a>
+                    </li>
+                    <li class="nav-item  col-md-4">
+                        <a class="btn btn-outline-primary btn-round" id="tab-whislist-link" data-toggle="tab" href="#tab-whislist" role="tab" aria-controls="tab-whislist" aria-selected="false">Özet</a>
+                    </li>
+                </ul>
+
             </div>
         </div>
 
         <div class="row mt-4">
-            <div class=col-md-8>
-                @await Component.InvokeAsync("Address")
-            </div>
-            <div class="col-md-4">
-                <div class="summary summary-cart">
-                    <h3 class="summary-title">Sepet</h3><!-- End .summary-title -->
 
-                    <table class="table table-summary">
-                        <tbody>
-                            <tr class="summary-subtotal">
-                                <td>Ara Toplam:</td>
-                                <td>toplam TL</td>
-                            </tr><!-- End .summary-subtotal -->
-                            <tr class="summary-shipping">
-                                <td>Kargo:</td>
-                                <td>&nbsp;</td>
-                            </tr>
+            <div class="col-md-12">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @await Component.InvokeAsync("Address")
+                            </div>
+                            <div class="col-md-4">
+                                <div class="summary summary-cart">
+                                    <h3 class="summary-title">Sepet</h3>
 
-                            <tr class="summary-shipping-row">
-                                <td>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="free-shipping" name="shipping" class="custom-control-input">
-                                        <label class="custom-control-label" for="free-shipping">Bedava Kargo</label>
-                                    </div><!-- End .custom-control -->
-                                </td>
-                                <td>$0.00</td>
-                            </tr><!-- End .summary-shipping-row -->
+                                    <table class="table table-summary">
+                                        <tbody>
+                                            <tr class="summary-subtotal">
+                                                <td>Ara Toplam:</td>
+                                                <td>toplam TL</td>
+                                            </tr>
+                                            <tr class="summary-shipping">
+                                                <td>Kargo:</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr class="summary-shipping-row">
+                                                <td>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="free-shipping" name="shipping" class="custom-control-input">
+                                                        <label class="custom-control-label" for="free-shipping">Bedava Kargo</label>
+                                                    </div>
+                                                </td>
+                                                <td>$0.00</td>
+                                            </tr>
+                                            <tr class="summary-total">
+                                                <td>Toplam:</td>
+                                                <td>111 TL</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                            <tr class="summary-shipping-row">
-                                <td>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="standart-shipping" name="shipping" class="custom-control-input">
-                                        <label class="custom-control-label" for="standart-shipping">Standart:</label>
-                                    </div><!-- End .custom-control -->
-                                </td>
-                                <td>$10.00</td>
-                            </tr><!-- End .summary-shipping-row -->
+                                    <a href="#" id="odeme" class="btn btn-outline-primary-2 btn-order btn-block">ÖDEME ADIMINA GEÇ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab-payment" role="tabpanel" aria-labelledby="tab-payment-link">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <label>İsim Soyisim</label>
+                                <input type="text" class="form-control" id="credit-name" name="credit-name" />
+                            </div>
+                            <div class="form-group">
+                                <label>Kredi Kartı Numarası</label>
+                                <input type="text" class="form-control" id="creditcartnumber" name="credit-cart" />
+                            </div>
+                            <div class="form-group">
+                                <label>Son Kullanma Tarihi</label>
+                                <input type="text" class="form-control" id="credit-skt" name="credit-skt" />
+                            </div>
+                            <div class="form-group">
+                                <label>Cvv</label>
+                                <input type="text" class="form-control" id="credit-cvv" name="credit-cvv" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Ödeme Yap</button>
+                        </form>
+                    </div>
 
-                            <tr class="summary-shipping-row">
-                                <td>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="express-shipping" name="shipping" class="custom-control-input">
-                                        <label class="custom-control-label" for="express-shipping">Express:</label>
-                                    </div><!-- End .custom-control -->
-                                </td>
-                                <td>$20.00</td>
-                            </tr><!-- End .summary-shipping-row -->
 
-
-
-                            <tr class="summary-total">
-                                <td>Toplam:</td>
-                                <td>111 TL</td>
-                            </tr><!-- End .summary-total -->
-                        </tbody>
-                    </table><!-- End .table table-summary -->
-
-                    <a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">ÖDEME ADIMINA GEÇ</a>
-                </div><!-- End .summary -->
+                </div>
             </div>
         </div>
     </div>
@@ -91,10 +103,8 @@
          value.children[0].children[0].children[0].innerHTML+="<input type='radio' name='adres' value='"+id+"'>";
          console.log(value.children[0].children[0].children[0]);
         });
-
     });
-    //$("[Name='carddashboard']").click((e)=>{
-
-    //   e.target.children[0].innerHTML+='<i class="fa-solid fa-check fa-2x" style="color:#15A962"></i>';
-    //})
+    $("#odeme").click(()=>{
+        $('.nav a[href="#tab-payment"]').tab('show');
+    })
 </script>
