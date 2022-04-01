@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-
+<script src="https://unpkg.com/imask"></script>
 <div class="page-content">
     <div class="container">
         <div class="col-md-12 ml-5 mt-4">
@@ -15,7 +15,7 @@
                         <a class="btn btn-outline-primary btn-round" id="tab-payment-link" data-toggle="tab" href="#tab-payment" role="tab" aria-controls="tab-payment" aria-selected="false">Ödeme</a>
                     </li>
                     <li class="nav-item  col-md-4">
-                        <a class="btn btn-outline-primary btn-round" id="tab-whislist-link" data-toggle="tab" href="#tab-whislist" role="tab" aria-controls="tab-whislist" aria-selected="false">Özet</a>
+                        <a class="btn btn-outline-primary btn-round" id="tab-summary-link" data-toggle="tab" href="#tab-summary" role="tab" aria-controls="tab-summary" aria-selected="false">Özet</a>
                     </li>
                 </ul>
 
@@ -39,7 +39,7 @@
                                         <tbody>
                                             <tr class="summary-subtotal">
                                                 <td>Ara Toplam:</td>
-                                                <td>toplam TL</td>
+                                                <td>@ViewBag.p TL</td>
                                             </tr>
                                             <tr class="summary-shipping">
                                                 <td>Kargo:</td>
@@ -48,15 +48,15 @@
                                             <tr class="summary-shipping-row">
                                                 <td>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" id="free-shipping" name="shipping" class="custom-control-input">
+                                                        <input type="radio" id="free-shipping" name="shipping" class="custom-control-input" checked>
                                                         <label class="custom-control-label" for="free-shipping">Bedava Kargo</label>
                                                     </div>
                                                 </td>
-                                                <td>$0.00</td>
+                                                <td>0 TL</td>
                                             </tr>
                                             <tr class="summary-total">
                                                 <td>Toplam:</td>
-                                                <td>111 TL</td>
+                                                <td>@ViewBag.p TL</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -68,27 +68,57 @@
                     </div>
                     <div class="tab-pane fade" id="tab-payment" role="tabpanel" aria-labelledby="tab-payment-link">
                         <form action="#" method="post">
+                            <input type="hidden" id="AddressId" name="AddressId" value="" />
                             <div class="form-group">
                                 <label>İsim Soyisim</label>
                                 <input type="text" class="form-control" id="credit-name" name="credit-name" />
                             </div>
                             <div class="form-group">
                                 <label>Kredi Kartı Numarası</label>
-                                <input type="text" class="form-control" id="creditcartnumber" name="credit-cart" />
+                                <input type="text" class="form-control" id="creditcartnumber" name="CartNumber" />
                             </div>
                             <div class="form-group">
                                 <label>Son Kullanma Tarihi</label>
-                                <input type="text" class="form-control" id="credit-skt" name="credit-skt" />
+                                <input type="text" class="form-control" id="creditskt" name="credit-skt" />
                             </div>
                             <div class="form-group">
                                 <label>Cvv</label>
-                                <input type="text" class="form-control" id="credit-cvv" name="credit-cvv" />
+                                <input type="text" class="form-control" id="creditcvv" name="credit-cvv" />
                             </div>
                             <button type="submit" class="btn btn-primary">Ödeme Yap</button>
                         </form>
                     </div>
 
-
+                    <div class="tab-pane fade" id="tab-summary" role="tabpanel" aria-labelledby="tab-summary-link">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td colspan="2"><h4 class="text-center" style="color:#198754">Ödeme Başarılı</h4> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><h3 class="text-center"><i style="color:#198754" class="icon-check fa-2x"></i></h3></td>
+                            </tr>
+                            <tr>
+                                <td>Ödeme Yöntemi</td>
+                                <td>Kredi Kartı</td>
+                            </tr>
+                            <tr>
+                                <td>Banka</td>
+                                <td>İş bankası</td>
+                            </tr>
+                            <tr>
+                                <td>Sipariş Numarası</td>
+                                <td>123 456 789</td>
+                            </tr>
+                            <tr>
+                                <td>İşlem Tarihi</td>
+                                <td>01/04/2022</td>
+                            </tr>
+                            <tr>
+                                <td>İşlem Tutarı</td>
+                                <td>123.456 TL</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,14 +127,38 @@
 
 <script>
     $( document ).ready(function() {
+        var element = document.getElementById('creditcartnumber');
+        var creditskt = document.getElementById('creditskt');
+        var creditcvv = document.getElementById('creditcvv');
+        var maskOptions = {
+            mask: '0000 0000 0000 0000'
+        };
+
+        var creditsktOptions = {
+            mask:'00/00'
+        };
+        var creditcvvOptions = {
+            mask:'000'
+        };
+        var mask = IMask(element, maskOptions);
+        var mask = IMask(creditskt, creditsktOptions);
+        var mask = IMask(creditcvv, creditcvvOptions);
+
         $.each($("[Name='carddashboard']"), function( index, value ) {
             let id = value.children[0].children[0].children[1].children[5].id;
 
          value.children[0].children[0].children[0].innerHTML+="<input type='radio' name='adres' value='"+id+"'>";
-         console.log(value.children[0].children[0].children[0]);
+         //console.log(value.children[0].children[0].children[0]);
         });
     });
     $("#odeme").click(()=>{
-        $('.nav a[href="#tab-payment"]').tab('show');
+        if( $("[Name='adres']").is(':checked')){
+            let id = $( "input:checked" ).val()
+            $('#AddressId').val(id);
+            $('.nav a[href="#tab-payment"]').tab('show');
+        }else{
+            alert("Şehir seçmelisiniz.")
+        }
+
     })
 </script>

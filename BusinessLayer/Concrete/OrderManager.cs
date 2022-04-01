@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(Order t)
         {
-            throw new NotImplementedException();
+            _orderDal.Insert(t);
         }
 
         public void TDelete(Order t)
