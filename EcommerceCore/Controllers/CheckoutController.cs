@@ -53,10 +53,11 @@ namespace EcommerceCore.Controllers
             var values = pm.GetProductAllWithImage();
             var user = _userManager.FindByNameAsync(User.Identity.Name);
             p.UserId = user.Result.Id;
-            p.AddressId = 2;
+           // p.AddressId = 2;
             p.OrderNumber = rastgele.Next(100000000,999999999);
             p.OrderStatus = 1;
             p.OrderDateTime = DateTime.Now;
+            p.PaymentMethod = "Kredi kartı";
             if (cookiecart != null)
             {
                 var list = JsonConvert.DeserializeObject<List<Cookie>>(cookiecart);
